@@ -1,6 +1,6 @@
 Name:		libkscreen
 Summary:	Display configuration library
-Version:	0.0.71
+Version:	0.0.92
 Release:	1
 Group:		Graphical desktop/KDE
 License:	GPLv2
@@ -18,6 +18,7 @@ of connected displays and ways to change the configuration.
 %files
 %{_kde_libdir}/kde4/plugins/kscreen/KSC_Fake.so
 %{_kde_libdir}/kde4/plugins/kscreen/KSC_XRandR.so
+%{_kde_libdir}/kde4/plugins/kscreen/KSC_XRandR11.so
 
 #------------------------------------------------------------------------------
 
