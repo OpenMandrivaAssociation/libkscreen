@@ -8,6 +8,8 @@ URL:		https://projects.kde.org/projects/playground/libs/libkscreen
 Source0:	ftp://ftp.kde.org/pub/kde/unstable/%{name}/%{version}/src/%{name}-%{version}.tar.bz2
 BuildRequires:	kdelibs4-devel
 BuildRequires:	pkgconfig(xcb)
+BuildRequires:	pkgconfig(xcb-image)
+BuildRequires:	pkgconfig(xcb-renderutil)
 BuildRequires:	pkgconfig(xrandr)
 BuildRequires:	pkgconfig(QJson)
 Requires:	kdebase4-runtime
