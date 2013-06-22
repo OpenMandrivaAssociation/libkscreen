@@ -25,7 +25,7 @@ of connected displays and ways to change the configuration.
 
 #------------------------------------------------------------------------------
 
-%define major 0
+%define major 1
 %define libname %mklibname kscreen %{major}
 
 %package -n %{libname}
