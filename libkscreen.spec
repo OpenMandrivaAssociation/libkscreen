@@ -1,7 +1,7 @@
 Summary:	Display configuration library
 Name:		libkscreen
 Version:	1.0.2
-Release:	5
+Release:	6
 License:	GPLv2+
 Group:		Graphical desktop/KDE
 Url:		https://projects.kde.org/projects/playground/libs/libkscreen
