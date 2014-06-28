@@ -1,11 +1,11 @@
 Summary:	Display configuration library
 Name:		libkscreen
-Version:	1.0
-Release:	2
-License:	GPLv2
+Version:	1.0.2
+Release:	6
+License:	GPLv2+
 Group:		Graphical desktop/KDE
 Url:		https://projects.kde.org/projects/playground/libs/libkscreen
-Source0:	ftp://ftp.kde.org/pub/kde/unstable/%{name}/%{version}/src/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.kde.org/pub/kde/stable/%{name}/%{version}/src/%{name}-%{version}.tar.xz
 BuildRequires:	kdelibs4-devel
 BuildRequires:	pkgconfig(xcb)
 BuildRequires:	pkgconfig(xcb-image)
