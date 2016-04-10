@@ -62,6 +62,7 @@ Files needed to build applications based on %{name}.
 
 %prep
 %setup -q
+sed -e '/tests/d' -i CMakeLists.txt
 
 %build
 %cmake_kde4
