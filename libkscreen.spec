@@ -1,73 +1,66 @@
-Summary:	Display configuration library
+%define major 7
+%define libname %{mklibname KF5Screen %{major}}
+%define devname %{mklibname KF5Screen -d}
+%define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
+
+Summary:	Library for dealing with screen parameters
 Name:		libkscreen
-Version:	1.0.5
-Release:	5
-License:	GPLv2+
-Group:		Graphical desktop/KDE
-Url:		https://projects.kde.org/projects/playground/libs/libkscreen
-Source0:	ftp://ftp.kde.org/pub/kde/stable/%{name}/%{version}/src/%{name}-%{version}.tar.xz
-BuildRequires:	kdelibs4-devel
+Version:	5.12.90
+Release:	1
+License:	LGPL
+Group:		System/Libraries
+Url:		http://kde.org/
+Source0:	http://download.kde.org/%{stable}/plasma/%(echo %{version} |cut -d. -f1-3)/libkscreen-%{version}.tar.xz
+BuildRequires:	cmake(ECM)
+BuildRequires:	cmake(KF5Wayland)
+BuildRequires:	pkgconfig(Qt5Core)
+BuildRequires:	pkgconfig(Qt5DBus)
+BuildRequires:	pkgconfig(Qt5Gui)
+BuildRequires:	pkgconfig(Qt5Test)
+BuildRequires:	pkgconfig(Qt5X11Extras)
+BuildRequires:	pkgconfig(x11)
 BuildRequires:	pkgconfig(xcb)
-BuildRequires:	pkgconfig(xcb-image)
-BuildRequires:	pkgconfig(xcb-renderutil)
+BuildRequires:	pkgconfig(xcb-randr)
+BuildRequires:	pkgconfig(xext)
 BuildRequires:	pkgconfig(xrandr)
-BuildRequires:	pkgconfig(QJson)
-Requires:	kdebase4-runtime
+Requires:	%{libname} = %{EVRD}
+
+%dependinglibpackage KF5Screen %{major}
+%{_libdir}/libKF5Screen.so.%{version}
 
 %description
-LibKScreen is a library that provides access to current configuration
-of connected displays and ways to change the configuration.
+Library for dealing with screen parameters.
 
 %files
-%{_kde_libdir}/kde4/plugins/kscreen/KSC_Fake.so
-%{_kde_libdir}/kde4/plugins/kscreen/KSC_XRandR.so
-%{_kde_libdir}/kde4/plugins/kscreen/KSC_XRandR11.so
-
-#------------------------------------------------------------------------------
-
-%define major 1
-%define libname %mklibname kscreen %{major}
-
-%package -n %{libname}
-Summary:	KDE 4 core library
-Group:		System/Libraries
-
-%description -n %{libname}
-LibKScreen is a library that provides access to current configuration
-of connected displays and ways to change the configuration.
-
-%files -n %{libname}
-%{_kde_libdir}/libkscreen.so.%{major}*
-
-#------------------------------------------------------------------------------
-
-%define devname %mklibname kscreen -d
+%{_bindir}/kscreen-doctor
+%{_libdir}/qt5/plugins/kf5/kscreen
+%{_libdir}/libexec/kf5/kscreen_backend_launcher
+%{_datadir}/dbus-1/services/org.kde.kscreen.service
 
 %package -n %{devname}
-Summary:	Devel stuff for %{name}
+Summary:	Development files for %{name}
 Group:		Development/KDE and Qt
-Requires:	%{libname} = %{version}-%{release}
-Provides:	%{name}-devel = %{version}-%{release}
+Requires:	%{libname} = %{EVRD}
 
 %description -n %{devname}
-Files needed to build applications based on %{name}.
+Development files for %{name}.
 
 %files -n %{devname}
-%{_kde_includedir}/kscreen
-%{_kde_libdir}/cmake/LibKScreen
-%{_kde_libdir}/libkscreen.so
-%{_kde_libdir}/pkgconfig/kscreen.pc
+%{_includedir}/KF5/KScreen
+%{_includedir}/KF5/kscreen_version.h
+%{_libdir}/cmake/KF5Screen
+%{_libdir}/libKF5Screen.so
+%{_libdir}/pkgconfig/*.pc
+%{_libdir}/qt5/mkspecs/modules/*
 
-#------------------------------------------------------------------------------
+#----------------------------------------------------------------------------
 
 %prep
-%setup -q
-sed -e '/tests/d' -i CMakeLists.txt
+%setup -qn libkscreen-%{version}
+%cmake_kde5
 
 %build
-%cmake_kde4
-%make
+%ninja -C build
 
 %install
-%makeinstall_std -C build
-
+%ninja_install -C build
