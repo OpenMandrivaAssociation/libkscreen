@@ -24,6 +24,7 @@ BuildRequires:	pkgconfig(xcb-randr)
 BuildRequires:	pkgconfig(xext)
 BuildRequires:	pkgconfig(xrandr)
 BuildRequires:	doxygen
+BuildRequires:	qt5-assistant
 Requires:	%{libname} = %{EVRD}
 
 %dependinglibpackage KF5Screen %{major}
