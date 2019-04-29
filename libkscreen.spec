@@ -23,6 +23,7 @@ BuildRequires:	pkgconfig(xcb)
 BuildRequires:	pkgconfig(xcb-randr)
 BuildRequires:	pkgconfig(xext)
 BuildRequires:	pkgconfig(xrandr)
+BuildRequires:	doxygen
 Requires:	%{libname} = %{EVRD}
 
 %dependinglibpackage KF5Screen %{major}
@@ -57,7 +58,7 @@ Development files for %{name}.
 #----------------------------------------------------------------------------
 
 %prep
-%setup -qn libkscreen-%{version}
+%autosetup -n libkscreen-%{version} -p1
 %cmake_kde5
 
 %build
