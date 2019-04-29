@@ -23,6 +23,9 @@ BuildRequires:	pkgconfig(xcb)
 BuildRequires:	pkgconfig(xcb-randr)
 BuildRequires:	pkgconfig(xext)
 BuildRequires:	pkgconfig(xrandr)
+# For qch docs
+BuildRequires:	doxygen
+BuildRequires:	qt5-assistant
 Requires:	%{libname} = %{EVRD}
 
 %dependinglibpackage KF5Screen %{major}
@@ -53,6 +56,19 @@ Development files for %{name}.
 %{_libdir}/libKF5Screen.so
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/qt5/mkspecs/modules/*
+
+#----------------------------------------------------------------------------
+
+%package -n %{name}-devel-docs
+Summary: Developer documentation for %{name} for use with Qt Assistant
+Group: Documentation
+Suggests: %{devname} = %{EVRD}
+
+%description -n %{name}-devel-docs
+Developer documentation for %{name} for use with Qt Assistant
+
+%files -n %{name}-devel-docs
+%{_docdir}/qt5/*.{tags,qch}
 
 #----------------------------------------------------------------------------
 
