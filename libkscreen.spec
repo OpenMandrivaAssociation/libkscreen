@@ -73,7 +73,7 @@ Developer documentation for %{name} for use with Qt Assistant
 #----------------------------------------------------------------------------
 
 %prep
-%setup -qn libkscreen-%{version}
+%autosetup -n libkscreen-%{version} -p1
 %cmake_kde5
 
 %build
