@@ -5,7 +5,7 @@
 
 Summary:	Library for dealing with screen parameters
 Name:		libkscreen
-Version:	5.16.1
+Version:	5.16.3
 Release:	1
 License:	LGPL
 Group:		System/Libraries
