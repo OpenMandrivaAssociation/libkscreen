@@ -5,8 +5,8 @@
 
 Summary:	Library for dealing with screen parameters
 Name:		libkscreen
-Version:	5.18.3
-Release:	2
+Version:	5.18.4
+Release:	1
 License:	LGPL
 Group:		System/Libraries
 Url:		http://kde.org/
@@ -29,7 +29,7 @@ BuildRequires:	qt5-assistant
 Requires:	%{libname} = %{EVRD}
 
 %dependinglibpackage KF5Screen %{major}
-%{_libdir}/libKF5Screen.so.%{version}
+%{_libdir}/libKF5Screen.so.5*
 
 %description
 Library for dealing with screen parameters.
