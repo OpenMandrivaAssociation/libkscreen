@@ -6,7 +6,7 @@
 Summary:	Library for dealing with screen parameters
 Name:		libkscreen
 Version:	5.21.3
-Release:	1
+Release:	2
 License:	LGPL
 Group:		System/Libraries
 Url:		http://kde.org/
@@ -27,6 +27,7 @@ BuildRequires:	pkgconfig(xrandr)
 BuildRequires:	doxygen
 BuildRequires:	qt5-assistant
 Requires:	%{libname} = %{EVRD}
+Requires:	%{name}-backend = %{EVRD}
 
 %dependinglibpackage KF5Screen %{major}
 %{_libdir}/libKF5Screen.so.5*
@@ -37,9 +38,36 @@ Library for dealing with screen parameters.
 %files
 %{_datadir}/qlogging-categories5/%{name}.categories
 %{_bindir}/kscreen-doctor
-%{_libdir}/qt5/plugins/kf5/kscreen
+%dir %{_libdir}/qt5/plugins/kf5/kscreen
+%{_libdir}/qt5/plugins/kf5/kscreen/KSC_Fake.so
+%{_libdir}/qt5/plugins/kf5/kscreen/KSC_QScreen.so
 %{_libdir}/libexec/kf5/kscreen_backend_launcher
 %{_datadir}/dbus-1/services/org.kde.kscreen.service
+
+%package x11
+Summary:	X11 support for KScreen
+Group:		System/Libraries
+Requires:	%{name} = %{EVRD}
+Provides:	%{name}-backend = %{EVRD}
+
+%description x11
+X11 support for KScreen
+
+%files x11
+%{_libdir}/qt5/plugins/kf5/kscreen/KSC_XRandR.so
+%{_libdir}/qt5/plugins/kf5/kscreen/KSC_XRandR11.so
+
+%package wayland
+Summary:	Wayland support for KScreen
+Group:		System/Libraries
+Requires:	%{name} = %{EVRD}
+Provides:	%{name}-backend = %{EVRD}
+
+%description wayland
+Wayland support for KScreen
+
+%files wayland
+%{_libdir}/qt5/plugins/kf5/kscreen/KSC_KWayland.so
 
 %package -n %{devname}
 Summary:	Development files for %{name}
