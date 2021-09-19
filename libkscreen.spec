@@ -24,6 +24,8 @@ BuildRequires:	pkgconfig(xcb)
 BuildRequires:	pkgconfig(xcb-randr)
 BuildRequires:	pkgconfig(xext)
 BuildRequires:	pkgconfig(xrandr)
+BuildRequires:	cmake(PlasmaWaylandProtocols) >= 1.4.0
+BuildRequires:	qt5-qtwayland
 # For qch docs
 BuildRequires:	doxygen
 BuildRequires:	qt5-assistant
