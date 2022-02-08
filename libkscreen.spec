@@ -5,8 +5,8 @@
 
 Summary:	Library for dealing with screen parameters
 Name:		libkscreen
-Version:	5.23.5
-Release:	2
+Version:	5.24.0
+Release:	1
 License:	LGPL
 Group:		System/Libraries
 Url:		http://kde.org/
@@ -48,6 +48,7 @@ Library for dealing with screen parameters.
 %{_libdir}/qt5/plugins/kf5/kscreen/KSC_QScreen.so
 %{_libdir}/libexec/kf5/kscreen_backend_launcher
 %{_datadir}/dbus-1/services/org.kde.kscreen.service
+%{_prefix}/lib/systemd/user/plasma-kscreen.service
 
 %package x11
 Summary:	X11 support for KScreen
