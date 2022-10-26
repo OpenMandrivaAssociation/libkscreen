@@ -5,7 +5,7 @@
 
 Summary:	Library for dealing with screen parameters
 Name:		libkscreen
-Version:	5.26.1
+Version:	5.26.2
 Release:	1
 License:	LGPL
 Group:		System/Libraries
@@ -42,7 +42,7 @@ Requires:	%{name}-backend = %{EVRD}
 %description
 Library for dealing with screen parameters.
 
-%files
+%files -f libkscreen5_qt.lang
 %{_datadir}/qlogging-categories5/%{name}.categories
 %{_bindir}/kscreen-doctor
 %dir %{_libdir}/qt5/plugins/kf5/kscreen
@@ -117,3 +117,4 @@ Developer documentation for %{name} for use with Qt Assistant
 
 %install
 %ninja_install -C build
+%find_lang libkscreen5_qt --all-name --with-qt
