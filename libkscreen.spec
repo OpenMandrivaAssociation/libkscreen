@@ -1,5 +1,6 @@
 %define major 8
-%define libname %{mklibname KF5Screen %{major}}
+%define libname %{mklibname KF5Screen}
+%define oldlibname %{mklibname KF5Screen 7}
 %define devname %{mklibname KF5Screen -d}
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
@@ -36,9 +37,20 @@ BuildRequires:	qt5-assistant
 Requires:	%{libname} = %{EVRD}
 Requires:	%{name}-backend = %{EVRD}
 
-%dependinglibpackage KF5Screen %{major}
+%package -n %{libname}
+Summary: The KScreen library
+Group: System/Libraries
+Requires: %{name} = %{EVRD}
+%rename %{oldlibname}
+
+%description -n %{libname}
+The KScreen library
+
+%files -n %{libname}
+%{_libdir}/libKF5Screen.so.%{major}*
 %{_libdir}/libKF5Screen.so.5*
-%{_libdir}/libKF5ScreenDpms.so.*
+%{_libdir}/libKF5ScreenDpms.so.%{major}*
+%{_libdir}/libKF5ScreenDpms.so.5*
 
 %description
 Library for dealing with screen parameters.
