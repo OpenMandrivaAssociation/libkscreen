@@ -1,11 +1,11 @@
-%define major 7
+%define major 8
 %define libname %{mklibname KF5Screen %{major}}
 %define devname %{mklibname KF5Screen -d}
 %define stable %([ "`echo %{version} |cut -d. -f3`" -ge 80 ] && echo -n un; echo -n stable)
 
 Summary:	Library for dealing with screen parameters
 Name:		libkscreen
-Version:	5.26.5
+Version:	5.27.0
 Release:	1
 License:	LGPL
 Group:		System/Libraries
@@ -38,6 +38,7 @@ Requires:	%{name}-backend = %{EVRD}
 
 %dependinglibpackage KF5Screen %{major}
 %{_libdir}/libKF5Screen.so.5*
+%{_libdir}/libKF5ScreenDpms.so.*
 
 %description
 Library for dealing with screen parameters.
@@ -51,6 +52,7 @@ Library for dealing with screen parameters.
 %{_libdir}/libexec/kf5/kscreen_backend_launcher
 %{_datadir}/dbus-1/services/org.kde.kscreen.service
 %{_prefix}/lib/systemd/user/plasma-kscreen.service
+%{_datadir}/zsh/site-functions/_kscreen-doctor
 
 %package x11
 Summary:	X11 support for KScreen
@@ -90,6 +92,7 @@ Development files for %{name}.
 %{_includedir}/KF5/kscreen_version.h
 %{_libdir}/cmake/KF5Screen
 %{_libdir}/libKF5Screen.so
+%{_libdir}/libKF5ScreenDpms.so
 %{_libdir}/pkgconfig/*.pc
 %{_libdir}/qt5/mkspecs/modules/*
 
