@@ -46,7 +46,6 @@ BuildOption:	-DBUILD_TESTING:BOOL=ON
 BuildOption:	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
 Requires:	%{libname} = %{EVRD}
 Requires:	%{name}-backend = %{EVRD}
-Requires:	%{name}-dbus-service = %{EVRD}
 # Renamed after 6.0 2025-04-27
 %rename plasma6-libkscreen
 # This was split out for coinstallability with Plasma 5, no longer needed
