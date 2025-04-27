@@ -7,9 +7,9 @@
 %define gitbranchd %(echo %{gitbranch} |sed -e 's,/,-,g')
 
 Summary:	Library for dealing with screen parameters
-Name:		plasma6-libkscreen
+Name:		libkscreen
 Version:	6.3.4
-Release:	%{?git:0.%{git}.}2
+Release:	%{?git:0.%{git}.}3
 License:	LGPL
 Group:		System/Libraries
 Url:		https://kde.org/
@@ -40,9 +40,17 @@ BuildRequires:	cmake(Qt6WaylandClient)
 # For qch docs
 BuildRequires:	doxygen
 BuildRequires:	cmake(Qt6ToolsTools)
+BuildSystem:	cmake
+BuildOption:	-DBUILD_QCH:BOOL=ON
+BuildOption:	-DBUILD_TESTING:BOOL=ON
+BuildOption:	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON
 Requires:	%{libname} = %{EVRD}
 Requires:	%{name}-backend = %{EVRD}
 Requires:	%{name}-dbus-service = %{EVRD}
+# Renamed after 6.0 2025-04-27
+%rename plasma6-libkscreen
+# This was split out for coinstallability with Plasma 5, no longer needed
+%rename plasma6-libkscreen-dbus-service
 
 %package -n %{libname}
 Summary: The KScreen library
@@ -61,12 +69,14 @@ The KScreen library
 %description
 Library for dealing with screen parameters.
 
-%files -f libkscreen6_qt.lang
+%files -f %{name}.lang
 %{_datadir}/qlogging-categories6/libkscreen.categories
 %dir %{_qtdir}/plugins/kf6/kscreen
 %{_qtdir}/plugins/kf6/kscreen/KSC_Fake.so
 %{_qtdir}/plugins/kf6/kscreen/KSC_QScreen.so
 %{_libdir}/libexec/kf6/kscreen_backend_launcher
+%{_datadir}/dbus-1/services/org.kde.kscreen.service
+%{_prefix}/lib/systemd/user/plasma-kscreen.service
 
 %package x11
 Summary:	X11 support for KScreen
@@ -108,31 +118,18 @@ Development files for %{name}.
 %{_libdir}/libKF6ScreenDpms.so
 %{_libdir}/pkgconfig/*.pc
 
-%package -n plasma6-kscreen-doctor
+%package -n kscreen-doctor
 Summary:	Tool for examining KScreen
 Group:		Development/KDE and Qt
 Requires:	%{libname} = %{EVRD}
+# Renamed after 6.0 2025-04-27
 
-%description -n plasma6-kscreen-doctor
+%description -n kscreen-doctor
 Tool for examining KScreen
 
-%files -n plasma6-kscreen-doctor
+%files -n kscreen-doctor
 %{_bindir}/kscreen-doctor
 %{_datadir}/zsh/site-functions/_kscreen-doctor
-
-# DBus services are split out for coinstallability with Plasma 5.
-# This package should be merged into the main package once Plasma 5 is dropped.
-%package dbus-service
-Summary:	DBus services for working with KScreen
-Group:		System/Libraries
-Requires:	%{name} = %{EVRD}
-
-%description dbus-service
-DBus services for working with KScreen
-
-%files dbus-service
-%{_datadir}/dbus-1/services/org.kde.kscreen.service
-%{_prefix}/lib/systemd/user/plasma-kscreen.service
 
 #----------------------------------------------------------------------------
 
@@ -146,21 +143,3 @@ Developer documentation for %{name} for use with Qt Assistant
 
 %files -n %{name}-devel-docs
 %{_qtdir}/doc/*.{tags,qch}
-
-#----------------------------------------------------------------------------
-
-%prep
-%autosetup -n libkscreen-%{?git:%{gitbranchd}}%{!?git:%{version}} -p1
-%cmake \
-	-DBUILD_QCH:BOOL=ON \
-	-DBUILD_WITH_QT6:BOOL=ON \
-	-DBUILD_TESTING:BOOL=ON \
-	-DKDE_INSTALL_USE_QT_SYS_PATHS:BOOL=ON \
-	-G Ninja
-
-%build
-%ninja_build -C build
-
-%install
-%ninja_install -C build
-%find_lang libkscreen6_qt --all-name --with-qt
