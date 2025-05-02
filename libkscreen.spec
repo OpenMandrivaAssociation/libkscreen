@@ -82,6 +82,8 @@ Summary:	X11 support for KScreen
 Group:		System/Libraries
 Requires:	%{name} = %{EVRD}
 Provides:	%{name}-backend = %{EVRD}
+# Renamed after 6.0 2025-04-27
+%rename plasma6-libkscreen-x11
 
 %description x11
 X11 support for KScreen
@@ -94,6 +96,8 @@ Summary:	Wayland support for KScreen
 Group:		System/Libraries
 Requires:	%{name} = %{EVRD}
 Provides:	%{name}-backend = %{EVRD}
+# Renamed after 6.0 2025-04-27
+%rename plasma6-libkscreen-wayland
 
 %description wayland
 Wayland support for KScreen
@@ -122,6 +126,7 @@ Summary:	Tool for examining KScreen
 Group:		Development/KDE and Qt
 Requires:	%{libname} = %{EVRD}
 # Renamed after 6.0 2025-04-27
+%rename plasma6-kscreen-doctor
 
 %description -n kscreen-doctor
 Tool for examining KScreen
@@ -136,6 +141,8 @@ Tool for examining KScreen
 Summary: Developer documentation for %{name} for use with Qt Assistant
 Group: Documentation
 Suggests: %{devname} = %{EVRD}
+# Renamed after 6.0 2025-04-27
+%rename plasma6-libkscreen-devel-docs
 
 %description -n %{name}-devel-docs
 Developer documentation for %{name} for use with Qt Assistant
