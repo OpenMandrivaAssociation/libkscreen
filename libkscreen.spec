@@ -8,7 +8,7 @@
 
 Summary:	Library for dealing with screen parameters
 Name:		libkscreen
-Version:	6.3.5
+Version:	6.4.0
 Release:	%{?git:0.%{git}.}1
 License:	LGPL
 Group:		System/Libraries
@@ -148,4 +148,4 @@ Suggests: %{devname} = %{EVRD}
 Developer documentation for %{name} for use with Qt Assistant
 
 %files -n %{name}-devel-docs
-%{_qtdir}/doc/*.{tags,qch}
+%{_qtdir}/doc/KF?Screen.*
