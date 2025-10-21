@@ -8,7 +8,7 @@
 
 Summary:	Library for dealing with screen parameters
 Name:		libkscreen
-Version:	6.4.5
+Version:	6.5.0
 Release:	%{?git:0.%{git}.}1
 License:	LGPL
 Group:		System/Libraries
@@ -72,7 +72,6 @@ Library for dealing with screen parameters.
 %{_datadir}/qlogging-categories6/libkscreen.categories
 %dir %{_qtdir}/plugins/kf6/kscreen
 %{_qtdir}/plugins/kf6/kscreen/KSC_Fake.so
-%{_qtdir}/plugins/kf6/kscreen/KSC_QScreen.so
 %{_libdir}/libexec/kf6/kscreen_backend_launcher
 %{_datadir}/dbus-1/services/org.kde.kscreen.service
 %{_prefix}/lib/systemd/user/plasma-kscreen.service
