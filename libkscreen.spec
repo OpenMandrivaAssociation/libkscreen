@@ -8,8 +8,8 @@
 
 Summary:	Library for dealing with screen parameters
 Name:		libkscreen
-Version:	6.7.5
-Release:	%{?git:0.%{git}.}2
+Version:	6.8.0
+Release:	%{?git:0.%{git}.}1
 License:	LGPL
 Group:		System/Libraries
 Url:		https://kde.org/
@@ -18,8 +18,10 @@ Source0:	https://invent.kde.org/plasma/libkscreen/-/archive/%{gitbranch}/libkscr
 %else
 Source0:	http://download.kde.org/%{stable}/plasma/%(echo %{version} |cut -d. -f1-3)/libkscreen-%{version}.tar.xz
 %endif
+# 6.8 inlines the backends into libKF6Screen and drops the plugin loader.
+# This puts XRandR and X11 DPMS back beside the Wayland backend.
+Patch0:		libkscreen-6.8.0-keep-x11.patch
 BuildRequires:	cmake(ECM)
-BuildRequires:	cmake(KWayland) >= 5.90.0
 BuildRequires:	cmake(KF6Config)
 BuildRequires:	cmake(QtWaylandScanner)
 BuildRequires:	cmake(WaylandScanner)
@@ -35,7 +37,7 @@ BuildRequires:	pkgconfig(xcb)
 BuildRequires:	pkgconfig(xcb-randr)
 BuildRequires:	pkgconfig(xext)
 BuildRequires:	pkgconfig(xrandr)
-BuildRequires:	cmake(PlasmaWaylandProtocols) > 1.10
+BuildRequires:	cmake(PlasmaWaylandProtocols) >= 1.23
 BuildRequires:	cmake(Qt6WaylandClient)
 # For qch docs
 BuildRequires:	doxygen
@@ -70,11 +72,7 @@ Library for dealing with screen parameters.
 
 %files -f %{name}.lang
 %{_datadir}/qlogging-categories6/libkscreen.categories
-%dir %{_qtdir}/plugins/kf6/kscreen
-%{_qtdir}/plugins/kf6/kscreen/KSC_Fake.so
-%{_libdir}/libexec/kf6/kscreen_backend_launcher
-%{_datadir}/dbus-1/services/org.kde.kscreen.service
-%{_prefix}/lib/systemd/user/plasma-kscreen.service
+%dir %{_datadir}/libkscreen
 
 %package x11
 Summary:	X11 support for KScreen
@@ -88,7 +86,7 @@ Provides:	%{name}-backend = %{EVRD}
 X11 support for KScreen
 
 %files x11
-%{_qtdir}/plugins/kf6/kscreen/KSC_XRandR.so
+%{_datadir}/libkscreen/README.x11
 
 %package wayland
 Summary:	Wayland support for KScreen
@@ -102,7 +100,7 @@ Provides:	%{name}-backend = %{EVRD}
 Wayland support for KScreen
 
 %files wayland
-%{_qtdir}/plugins/kf6/kscreen/KSC_KWayland.so
+%{_datadir}/libkscreen/README.wayland
 
 %package -n %{devname}
 Summary:	Development files for %{name}
@@ -148,3 +146,8 @@ Developer documentation for %{name} for use with Qt Assistant
 
 %files -n %{name}-devel-docs
 %{_qtdir}/doc/KF?Screen.*
+
+%install -a
+mkdir -p %{buildroot}%{_datadir}/libkscreen
+echo "XRandR is built into libKF6Screen." > %{buildroot}%{_datadir}/libkscreen/README.x11
+echo "The Wayland backend is built into libKF6Screen." > %{buildroot}%{_datadir}/libkscreen/README.wayland
