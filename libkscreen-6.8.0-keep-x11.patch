@@ -1,15 +1,6 @@
 diff -ruN -x build -x '*.o' -x .ninja_deps -x .ninja_log libkscreen-pristine/CMakeLists.txt b/CMakeLists.txt
 --- a/CMakeLists.txt	2026-10-08 13:20:05.000000000 +0200
 +++ b/CMakeLists.txt	2026-10-18 18:43:38.625718849 +0200
-@@ -35,7 +35,7 @@
- 
- find_package(WaylandScanner)
- 
--find_package(PlasmaWaylandProtocols 1.21 CONFIG)
-+find_package(PlasmaWaylandProtocols 1.23.0 CONFIG)
- set_package_properties(PlasmaWaylandProtocols PROPERTIES TYPE REQUIRED)
- 
- find_package(Wayland 1.24 COMPONENTS Client)
 @@ -43,6 +43,13 @@
                         TYPE REQUIRED
                        )
